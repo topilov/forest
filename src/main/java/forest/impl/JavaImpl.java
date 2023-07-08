@@ -16,6 +16,7 @@ public class JavaImpl implements Java {
 
 	private String javaPath = "java";
 	private String mainClass;
+	private String beforePath;
 	private Collection<Object> arguments = new ArrayList<>();
 	private Collection<Object> jvmArgs = new ArrayList<>();
 	private Collection<Object> classpath = new ArrayList<>();
@@ -23,6 +24,11 @@ public class JavaImpl implements Java {
 	@Override
 	public String[] getExecutionCommand() {
 		List<String> args = new ArrayList<>();
+
+		if (beforePath != null) {
+			args.add(this.beforePath);
+		}
+
 		args.add(this.javaPath);
 
 		if (mainClass == null) throw new ForestException("Java: No main class specified");
